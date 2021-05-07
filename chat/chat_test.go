@@ -47,3 +47,43 @@ func TestSayHello(t *testing.T) {
 
 	log.Printf("Response: %+v", resp)
 }
+
+func TestLoadMessages(t *testing.T) {
+	ctx := context.Background()
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	if err != nil {
+		t.Fatalf("Failed to dial bufnet: %v", err)
+	}
+
+	defer conn.Close()
+	client := NewChatServiceClient(conn)
+
+	//message := Message {
+	//	Body: "First message",
+	//}
+	//
+	//secondMessage := Message {
+	//	Body: "Second message",
+	//}
+	//
+	//messages := []*Message {
+	//	&message,
+	//	&secondMessage,
+	//}
+
+	//messageResponse := MessageResponse{
+	//	Messages: messages,
+	//}
+
+	itemQuery := ItemQuery{
+		Id: 1,
+	}
+
+	resp, err := client.LoadMessages(ctx, &itemQuery)
+
+	if err != nil {
+		t.Fatalf("failed to load messages: %v", err)
+	}
+
+	log.Printf("Response: %v", resp)
+}

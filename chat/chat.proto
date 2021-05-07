@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "./";
+
+message Message {
+  string body = 1;
+  int32 id = 2;
+}
+
+message ItemQuery {
+  int32 id = 1;
+}
+
+message MessageResponse {
+  repeated Message messages = 1;
+}
+
+service ChatService {
+  rpc SayHello(Message) returns (Message) {}
+  rpc LoadMessages(ItemQuery) returns (MessageResponse){}
+  rpc DeleteMessage(ItemQuery) returns (MessageResponse){}
+}
