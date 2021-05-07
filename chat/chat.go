@@ -16,3 +16,7 @@ func (s *Server) SayHello(ctx context.Context, message *Message) (*Message, erro
 func (s *Server) LoadMessages(ctx context.Context, id *ItemQuery)(*MessageResponse, error){
 	return &MessageResponse{}, nil
 }
+
+func (s *Server) DeleteMessage(ctx context.Context, id *ItemQuery)(*MessageResponse, error) {
+	return &MessageResponse{}, nil
+}
